@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.0.1
+* Wrapped and css in layers to make it easier for sub-themes to override css
+* Minified flexslider js
+* Minified theme css
+* Removed fontawesome temporarily
+
+@TODO Add Fontawesome selection to theme settings
+
 ## 2.0.0
 * Upgraded to Bootstrap 5
 
