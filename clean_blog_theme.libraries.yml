@@ -2,12 +2,10 @@ global-css:
   version: VERSION
   css:
     theme:
-     css/font-awesome.min.css: {}
-     includes/flexslider/flexslider.css: {}
-     css/style.css: {}
+      css/style.min.css: {}
   js:
     js/script.js: {}
-    includes/flexslider/jquery.flexslider.js: {}
+    includes/flexslider/jquery.flexslider.min.js: {}
   dependencies:
     - core/jquery
     - core/drupal.ajax
