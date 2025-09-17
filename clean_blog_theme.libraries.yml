@@ -26,6 +26,14 @@ flexslider:
     - core/drupalSettings
     - core/once
 
+fontawesome:
+  version: 7.x
+  css:
+    theme:
+      includes/fontawesome/css/all.min.css: {}
+  dependencies:
+    - core/drupal
+
 bootstrap-lib:
   version: 5.x
   css:
