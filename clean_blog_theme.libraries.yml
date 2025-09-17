@@ -5,6 +5,19 @@ global-css:
       css/style.min.css: {}
   js:
     js/script.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/once
+
+flexslider:
+  version: VERSION
+  css:
+    theme:
+      includes/flexslider/flexslider.min.css: {}
+  js:
     includes/flexslider/jquery.flexslider.min.js: {}
   dependencies:
     - core/jquery

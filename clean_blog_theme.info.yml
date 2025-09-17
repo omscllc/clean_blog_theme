@@ -5,6 +5,7 @@ description: 'Clean Blog Theme is clean blogger theme forked from https://git.dr
 core_version_requirement: ^9 || ^10 || ^11
 libraries:
   - clean_blog_theme/bootstrap-lib
+  - clean_blog_theme/flexslider
   - clean_blog_theme/global-css
 
 # Regions

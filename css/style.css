@@ -1,7 +1,4 @@
-@layer imports {
-  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
-  @import "../includes/flexslider/flexslider.min.css";
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
 
 /*
     Clean Blog Theme version 2.0.1 https://github.com/omscllc/clean_blog_theme
