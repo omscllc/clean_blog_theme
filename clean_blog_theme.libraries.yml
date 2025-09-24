@@ -2,7 +2,8 @@ global-css:
   version: VERSION
   css:
     theme:
-      css/style.min.css: {}
+      css/style.min.css:
+        category: base
   js:
     js/script.js: {}
   dependencies:
@@ -16,13 +17,17 @@ fontawesome-cdn:
   version: 6.x
   css:
     theme:
-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css: { type: external, minified: true, layer: fontawesome }
+      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css:
+        category: fontawesome
+    js:
+      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js: { type: external, minified: true }
 
 bootstrap-cdn:
   version: 5.x
   css:
     theme:
-      https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css: { type: external, minified: true, layer: bootstrap }
+      https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css:
+        category: bootstrap
   js:
     https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js: { type: external, minified: true }
   dependencies:
@@ -35,7 +40,8 @@ flexslider-cdn:
   version: 2.7.2
   css:
     theme:
-      https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css: { type: external, minified: true, layer: flexslider }
+      https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.min.css:
+        category: flexslider
   js:
     https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js: { type: external, minified: true }
   dependencies:
