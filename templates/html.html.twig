@@ -36,7 +36,7 @@
 <head>
     {# Define the cascade layers in order before any CSS is loaded #}
     <style>
-        @layer base, bootstrap, fontawesome, flexslider;
+        @layer base, layout, component, theme;
     </style>
     <head-placeholder token="{{ placeholder_token }}">
         <title>{{ head_title|safe_join(' | ') }}</title>
