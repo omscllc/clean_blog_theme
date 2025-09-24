@@ -149,3 +149,5 @@ fabric.properties
 /.idea/php.xml
 /.idea/vcs.xml
 /.junie/guidelines.md
+/.idea/copilot.data.migration.ask.xml
+/.idea/copilot.data.migration.ask2agent.xml
