@@ -1,0 +1,15 @@
+{
+  "name": "clean_blog_theme",
+  "version": "2.0.1",
+  "description": "Build and minify CSS/JS for Clean Blog Theme with source maps.",
+  "scripts": {
+    "build:css": "npx postcss css/style.css -o css/style.min.css --map inline",
+    "build:js": "npx terser js/script.js -o js/script.min.js --source-map url=inline",
+    "build": "npm run build:css && npm run build:js"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.0",
+    "postcss-cli": "^10.1.0",
+    "terser": "^5.30.0"
+  }
+}
