@@ -1,10 +1,9 @@
-
 jQuery(document).ready(function(){
-  
-  jQuery('.flexslider').flexslider({
-    animation: "fade",
-	controlNav: false
-  });
- });
-
-
+  // Only initialize flexslider if the plugin is loaded
+  if (typeof jQuery.fn.flexslider === 'function') {
+    jQuery('.flexslider').flexslider({
+      animation: "fade",
+      controlNav: false
+    });
+  }
+});
