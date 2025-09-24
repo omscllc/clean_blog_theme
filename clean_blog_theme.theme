@@ -108,6 +108,20 @@ function clean_blog_theme_form_system_theme_settings_alter(&$form, \Drupal\Core\
         );
     }
 
+    // FontAwesome CDN toggle.
+    $form['busi_settings']['fontawesome'] = [
+        '#type' => 'details',
+        '#title' => t('FontAwesome CDN'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+    ];
+    $form['busi_settings']['fontawesome']['include_fontawesome'] = [
+        '#type' => 'checkbox',
+        '#title' => t('Include FontAwesome icons (CDN)'),
+        '#default_value' => theme_get_setting('include_fontawesome'),
+        '#description' => t('Check to include FontAwesome icons from CDN. Uncheck to disable.'),
+    ];
+
     // Custom submit to save the file permenant.
     $form['#submit'][] = 'clean_blog_theme_settings_form_submit';
 }
@@ -132,4 +146,18 @@ function clean_blog_theme_settings_form_submit(&$form, \Drupal\Core\Form\FormSta
             }
         }
     }
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function clean_blog_theme_preprocess_html(&$variables) {
+  if (theme_get_setting('include_fontawesome')) {
+    \Drupal::service('library.discovery')->getLibraryByName('clean_blog_theme', 'fontawesome-cdn');
+    $variables['#attached']['library'][] = 'clean_blog_theme/fontawesome-cdn';
+  }
+  if (theme_get_setting('slideshow_display')) {
+    \Drupal::service('library.discovery')->getLibraryByName('clean_blog_theme', 'flexslider-cdn');
+    $variables['#attached']['library'][] = 'clean_blog_theme/flexslider-cdn';
+  }
 }

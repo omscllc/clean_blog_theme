@@ -5,6 +5,9 @@
 * Minified flexslider js
 * Minified theme css
 * Removed fontawesome temporarily
+* Refactored to use Bootstrap, FontAwesome, and FlexSlider from their respective CDNs
+* Added theme setting to toggle FontAwesome CDN inclusion
+* FlexSlider CDN is now only loaded if slideshow is enabled
 
 @TODO Add Fontawesome selection to theme settings
 
