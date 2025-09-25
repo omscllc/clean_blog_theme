@@ -2,12 +2,13 @@
 
 /**
  * @file
- * Functions to support theming in the Btheme.
+ * Functions to support theming in the theme.
  */
+
+use \Drupal\Core\Form\FormStateInterface;
+
 $theme_name = \Drupal::theme()->getActiveTheme()->getName();
 define('THEME_PATH', base_path() . \Drupal::service('extension.list.theme')->getPath($theme_name));
-// Change the value to increase the slideshow.
-define('SLIDESHOW_COUNT', 5);
 
 use Drupal\Component\Utility\SafeMarkup;
 use Drupal\Component\Utility\Xss;
@@ -36,9 +37,11 @@ function clean_blog_theme_preprocess_page(&$vars) {
     }
     // Slide show
     $show_slideshow = theme_get_setting('slideshow_display');
+    $slide_count = (int) theme_get_setting('slide_count');
+    $slide_count = max(1, min(10, $slide_count));
     if ($vars['is_front'] && $show_slideshow) {
         $vars['slider'] = array();
-        for ($i = 1; $i <= SLIDESHOW_COUNT; $i++) {
+        for ($i = 1; $i <= $slide_count; $i++) {
             $fid = theme_get_setting("slide_image_{$i}");
             if (!empty($fid)) {
                 $file = File::load($fid[0]);
@@ -78,30 +81,52 @@ function clean_blog_theme_form_system_theme_settings_alter(&$form, \Drupal\Core\
         '#default_value' => theme_get_setting('slideshow_display'),
         '#description' => t("Check this option to show Slideshow in front page. Uncheck to hide."),
     );
+    $form['busi_settings']['slideshow']['slide_count'] = array(
+        '#type' => 'select',
+        '#title' => t('Number of slides'),
+        '#options' => array_combine(range(1, 10), range(1, 10)),
+        '#default_value' => theme_get_setting('slide_count'),
+        '#description' => t('Select the number of slides to display (1-10).'),
+        '#states' => array(
+            'enabled' => array(
+                ':input[name="slideshow_display"]' => array('checked' => TRUE),
+            ),
+        ),
+        '#ajax' => array(
+            'callback' => 'clean_blog_theme_slide_count_callback',
+            'wrapper' => 'slide-fieldsets-wrapper',
+            'event' => 'change',
+        ),
+    );
     $form['busi_settings']['slideshow']['slide'] = array(
         '#markup' => t('You can change the title, url and image of each slide in the following Slide Setting fieldsets.'),
     );
-
-    for ($i = 1; $i <= SLIDESHOW_COUNT; $i++) {
-        $form['busi_settings']['slideshow']['slide' . $i] = array(
+    $form['busi_settings']['slideshow']['slide_fieldsets'] = array(
+        '#type' => 'container',
+        '#attributes' => array('id' => 'slide-fieldsets-wrapper'),
+    );
+    $slide_count = (int) $form_state->getValue('slide_count', theme_get_setting('slide_count'));
+    $slide_count = max(1, min(10, $slide_count));
+    for ($i = 1; $i <= $slide_count; $i++) {
+        $form['busi_settings']['slideshow']['slide_fieldsets']['slide' . $i] = array(
             '#type' => 'details',
             '#title' => t('Slide ' . $i),
             '#collapsible' => TRUE,
             '#collapsed' => TRUE,
         );
-        $form['busi_settings']['slideshow']['slide' . $i]['slide_title_' . $i] = array(
+        $form['busi_settings']['slideshow']['slide_fieldsets']['slide' . $i]['slide_title_' . $i] = array(
             '#type' => 'textfield',
             '#title' => t('Slide ' . $i . ' Title'),
             '#default_value' => theme_get_setting("slide_title_{$i}"),
         );
-        $form['busi_settings']['slideshow']['slide' . $i]['slide_image_' . $i] = array(
+        $form['busi_settings']['slideshow']['slide_fieldsets']['slide' . $i]['slide_image_' . $i] = array(
             '#type' => 'managed_file',
             '#title' => t('Slide ' . $i . ' Image'),
             '#description' => t('Use same size for all the slideshow images(Recommented size : 1920 X 603).'),
             '#default_value' => theme_get_setting("slide_image_{$i}"),
             '#upload_location' => 'public://',
         );
-        $form['busi_settings']['slideshow']['slide' . $i]['slide_url_' . $i] = array(
+        $form['busi_settings']['slideshow']['slide_fieldsets']['slide' . $i]['slide_url_' . $i] = array(
             '#type' => 'textfield',
             '#title' => t('Slide ' . $i . ' URL'),
             '#default_value' => theme_get_setting("slide_url_{$i}"),
@@ -160,4 +185,11 @@ function clean_blog_theme_preprocess_html(&$variables) {
     \Drupal::service('library.discovery')->getLibraryByName('clean_blog_theme', 'flexslider-cdn');
     $variables['#attached']['library'][] = 'clean_blog_theme/flexslider-cdn';
   }
+}
+
+/**
+ * AJAX callback to update slide fieldsets based on slide count.
+ */
+function clean_blog_theme_slide_count_callback($form, FormStateInterface $form_state) {
+    return $form['busi_settings']['slideshow']['slide_fieldsets'];
 }

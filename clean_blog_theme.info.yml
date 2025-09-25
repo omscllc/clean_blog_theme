@@ -2,7 +2,7 @@ name: clean_blog_theme
 type: theme
 base theme: classy
 description: 'Clean Blog Theme is clean blogger theme forked from https://git.drupalcode.org/project/d8_blog_theme'
-core_version_requirement: ^9 || ^10 || ^11
+core_version_requirement: ^10.2 || ^11
 libraries:
   - clean_blog_theme/bootstrap-cdn
   - clean_blog_theme/global-css
