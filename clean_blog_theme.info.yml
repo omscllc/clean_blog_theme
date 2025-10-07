@@ -6,6 +6,8 @@ core_version_requirement: ^10.2 || ^11
 libraries:
   - clean_blog_theme/bootstrap-cdn
   - clean_blog_theme/global-css
+dependencies:
+  - classy:classy
 
 # Regions
 regions:
