@@ -74,10 +74,23 @@
 
   <header role="banner" id="header" class="clearfix">
     <div class="container">
-	{{ page.header }}
-	
-	</div>
+      {{ page.header }}
+
+    </div>
   </header>
+
+  {{ page.primary_menu }}
+
+  {% if page.highlighted %}
+    <div id="highlighted">
+      <div class="container">
+        <div class="row">{{ page.highlighted }}</div>
+      </div>
+    </div>
+  {% endif %}
+  {% if page.breadcrumb %}
+    {{ page.breadcrumb }}
+  {% endif %}
 
   {# Include a slider. #}
   {% if slider %}
@@ -93,91 +106,71 @@
     </div>
   {% endif %}
 
-  {% if page.highlighted %}
-    <div id="highlighted"><div class="container">
-	<div class="row">{{ page.highlighted }}</div>
-	</div></div>
-  {% endif %}
-	<div class="container">{{ page.breadcrumb }}</div>
-  {# Home Highlight regions. #}
-  {% if page.home_high1 or page.home_high2 or page.home_high3 %}
-    <div id="home-highlights" class="row">
-      <div class="container">{% if page.home_high1 %}
-        <div class="home-high-1 col-md-4">{{ page.home_high1 }}</div>
-      {% endif %}
-      {% if page.home_high2 %}
-        <div class="home-high-2 col-md-4">{{ page.home_high2 }}</div>
-      {% endif %}
-      {% if page.home_high3 %}
-        <div class="home-high-3 col-md-4">{{ page.home_high3 }}</div>
-      {% endif %}</div>
-    </div>
-  {% endif %}
 
   <main id="main" class="clearfix">
     <div class="container">
-	<div class="row">{% if page.sidebar_first %}
-      <div id="sidebar-first" class="sidebar {{ sidebarfirst }}" role="complementary">
-	          {{ page.sidebar_first }}
-			  	{{ page.secondary_menu }}
+      <div class="row">{% if page.sidebar_first %}
+          <div id="sidebar-first" class="sidebar {{ sidebarfirst }}" role="complementary">
+            {{ page.sidebar_first }}
+            {{ page.secondary_menu }}
 
-			  </div>
-       <!-- /#sidebar-first -->
-    {% endif %}
+          </div>
+          <!-- /#sidebar-first -->
+        {% endif %}
 
-    <div class="{{ conditionalStr }}" role="main">
-      {% if page.content_top %}
-        <div id="content_top">{{ page.content_top }}</div>
-      {% endif %}
+        <div class="{{ conditionalStr }}" role="main">
+          {% if page.content_top %}
+            <div id="content_top">{{ page.content_top }}</div>
+          {% endif %}
 
-      {{ page.content }}
+          {{ page.content }}
 
-    </div>{# /#post-content #}
+        </div>{# /#post-content #}
 
-    {% if page.sidebar_second %}
-      <div id="sidebar-second" class="sidebar {{ sidebarsecond }}" role="complementary">
-        {{ page.sidebar_second }}
-      </div> <!-- /#sidebar-first -->
-    {% endif %}</div>
-</div>
+        {% if page.sidebar_second %}
+          <div id="sidebar-second" class="sidebar {{ sidebarsecond }}" role="complementary">
+            {{ page.sidebar_second }}
+          </div> <!-- /#sidebar-first -->
+        {% endif %}</div>
+    </div>
   </main>
 
   {# Bottom regions. #}
-{#  {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}#}
-{#    <div id="footer-saran" class="row">#}
-{#      <div id="footer-wrap">#}
-{#        {% if page.footer_first %}#}
-{#          <div class="footer-1 col-md-3">{{ page.footer_first }}</div>#}
-{#        {% endif %}#}
-{#        {% if page.footer_second %}#}
-{#          <div class="footer-2 col-md-3">{{ page.footer_second }}</div>#}
-{#        {% endif %}#}
-{#        {% if page.footer_third %}#}
-{#          <div class="footer-3 col-md-3">{{ page.footer_third }}</div>#}
-{#        {% endif %}#}
-{#        {% if page.footer_fourth %}#}
-{#          <div class="footer-4 col-md-3">{{ page.footer_fourth }}</div>#}
-{#        {% endif %}#}
-{#      </div>#}
-{#    </div>#}
-{#    <div class="clear"></div>#}
-{#  {% endif %}#}
+  {#  {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %} #}
+  {#    <div id="footer-saran" class="row"> #}
+  {#      <div id="footer-wrap"> #}
+  {#        {% if page.footer_first %} #}
+  {#          <div class="footer-1 col-md-3">{{ page.footer_first }}</div> #}
+  {#        {% endif %} #}
+  {#        {% if page.footer_second %} #}
+  {#          <div class="footer-2 col-md-3">{{ page.footer_second }}</div> #}
+  {#        {% endif %} #}
+  {#        {% if page.footer_third %} #}
+  {#          <div class="footer-3 col-md-3">{{ page.footer_third }}</div> #}
+  {#        {% endif %} #}
+  {#        {% if page.footer_fourth %} #}
+  {#          <div class="footer-4 col-md-3">{{ page.footer_fourth }}</div> #}
+  {#        {% endif %} #}
+  {#      </div> #}
+  {#    </div> #}
+  {#    <div class="clear"></div> #}
+  {#  {% endif %} #}
 
   <footer class="site-footer">
-      <div class="container">
-        {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
-          <div class="site-footer__top clearfix">
-            {{ page.footer_first }}
-            {{ page.footer_second }}
-            {{ page.footer_third }}
-            {{ page.footer_fourth }}
-          </div>
-        {% endif %}
-        {% if page.footer_fifth %}
-          <div class="site-footer__bottom">
-            {{ page.footer_fifth }}
-          </div>
-        {% endif %}
+    {#      <div class="container"> #}
+    {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}
+      <div class="site-footer__top clearfix">
+        {{ page.footer_first }}
+        {{ page.footer_second }}
+        {{ page.footer_third }}
+        {{ page.footer_fourth }}
       </div>
-    </footer>
+    {% endif %}
+    {% if page.footer_fifth %}
+      <div class="site-footer__bottom">
+        {{ page.footer_fifth }}
+      </div>
+    {% endif %}
+    {#      </div> #}
+  </footer>
 </div>
